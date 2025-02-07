@@ -4,7 +4,7 @@ public class Animal {
     private int age;
     private boolean isMammal;
 
-    // Constructeur paramétré
+    // Constructeur
     public Animal(String family, String name, int age, boolean isMammal) {
         this.family = family;
         this.name = name;
@@ -12,12 +12,25 @@ public class Animal {
         this.isMammal = isMammal;
     }
 
-    // Méthode pour afficher les informations de l'animal
+    // Getter pour le nom
+    public String getName() {
+        return name;
+    }
+
+    // Méthode d'affichage
     public void displayAnimal() {
         System.out.println("Nom de l'animal : " + name);
         System.out.println("Famille : " + family);
         System.out.println("Âge : " + age + " ans");
         System.out.println("Mammifère : " + (isMammal ? "Oui" : "Non"));
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Animal animal = (Animal) obj;
+        return name.equalsIgnoreCase(animal.name) && family.equalsIgnoreCase(animal.family);
     }
 
     @Override
