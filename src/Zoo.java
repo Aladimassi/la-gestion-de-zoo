@@ -39,6 +39,6 @@ public class Zoo {
 
     @Override
     public String toString() {
-        return "Zoo [name=" + name + ", city=" + city + ", nbrCages=" + nbrCages + "]";
+        return "tn.esprit.gestionzoo.entities.Zoo [name=" + name + ", city=" + city + ", nbrCages=" + nbrCages + "]";
     }
 }

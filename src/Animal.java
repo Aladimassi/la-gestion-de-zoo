@@ -22,6 +22,6 @@ public class Animal {
 
     @Override
     public String toString() {
-        return "Animal [name=" + name + ", family=" + family + ", age=" + age + ", isMammal=" + isMammal + "]";
+        return "tn.esprit.gestionzoo.entities.Animal [name=" + name + ", family=" + family + ", age=" + age + ", isMammal=" + isMammal + "]";
     }
 }
