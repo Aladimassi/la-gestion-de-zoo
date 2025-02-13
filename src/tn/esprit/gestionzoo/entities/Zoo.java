@@ -1,6 +1,7 @@
 package tn.esprit.gestionzoo.entities;
 
 public class Zoo {
+    // Attributs privés
     private final int MAX_CAGES = 25; // Nombre maximal de cages
     private Animal[] animals;
     private String name;
@@ -9,10 +10,38 @@ public class Zoo {
 
     // Constructeur
     public Zoo(String name, String city) {
-        this.name = name;
+        setName(name); // Validation via le setter
         this.city = city;
         this.animals = new Animal[MAX_CAGES];
         this.animalCount = 0;
+    }
+
+    // Getter pour name
+    public String getName() {
+        return name;
+    }
+
+    // Setter pour name avec validation
+    public void setName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Le nom du zoo ne peut pas être vide.");
+        }
+        this.name = name;
+    }
+
+    // Getter pour city
+    public String getCity() {
+        return city;
+    }
+
+    // Setter pour city
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    // Getter pour animalCount
+    public int getAnimalCount() {
+        return animalCount;
     }
 
     // Méthode pour ajouter un animal
@@ -34,57 +63,22 @@ public class Zoo {
         return true;
     }
 
-    // Méthode pour afficher tous les animaux
-    public void displayAnimals() {
-        System.out.println("Liste des animaux dans le zoo :");
-        for (int i = 0; i < animalCount; i++) {
-            animals[i].displayAnimal();
-        }
-    }
-
-    // Méthode pour rechercher un animal par son nom
-    public int searchAnimal(String name) {
-        for (int i = 0; i < animalCount; i++) {
-            if (animals[i].getName().equalsIgnoreCase(name)) {
-                return i;
-            }
-        }
-        return -1; // tn.esprit.gestionzoo.entities.Animal non trouvé
-    }
-
-    // Méthode pour supprimer un animal
-    public boolean removeAnimal(Animal animal) {
-        for (int i = 0; i < animalCount; i++) {
-            if (animals[i].equals(animal)) {
-                // Décaler les autres animaux pour combler l'espace
-                for (int j = i; j < animalCount - 1; j++) {
-                    animals[j] = animals[j + 1];
-                }
-                animals[--animalCount] = null; // Réduire le compteur et nettoyer la dernière case
-                return true;
-            }
-        }
-        System.out.println("Erreur : tn.esprit.gestionzoo.entities.Animal non trouvé.");
-        return false;
-    }
-
     // Méthode pour vérifier si le zoo est plein
     public boolean isZooFull() {
         return animalCount >= MAX_CAGES;
     }
 
-    // Méthode pour comparer deux zoos
-    public static Zoo comparerZoo(Zoo z1, Zoo z2) {
-        return (z1.animalCount >= z2.animalCount) ? z1 : z2;
-    }
-
-    // Méthode d'affichage du zoo
+    // Méthode d'affichage
     public void displayZoo() {
-        System.out.println("\n--- Informations du tn.esprit.gestionzoo.entities.Zoo ---");
+        System.out.println("\n--- Informations du Zoo ---");
         System.out.println("Nom du zoo : " + name);
         System.out.println("Ville : " + city);
         System.out.println("Nombre d'animaux : " + animalCount);
         System.out.println("Capacité maximale : " + MAX_CAGES);
-        displayAnimals();
+
+        System.out.println("Liste des animaux dans le zoo :");
+        for (int i = 0; i < animalCount; i++) {
+            System.out.println(animals[i]);
+        }
     }
 }
