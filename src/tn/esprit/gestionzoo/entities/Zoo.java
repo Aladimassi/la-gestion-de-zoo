@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+package tn.esprit.gestionzoo.entities;
 
 public class Zoo {
     private final int MAX_CAGES = 25; // Nombre maximal de cages
@@ -49,7 +49,7 @@ public class Zoo {
                 return i;
             }
         }
-        return -1; // Animal non trouvé
+        return -1; // tn.esprit.gestionzoo.entities.Animal non trouvé
     }
 
     // Méthode pour supprimer un animal
@@ -64,7 +64,7 @@ public class Zoo {
                 return true;
             }
         }
-        System.out.println("Erreur : Animal non trouvé.");
+        System.out.println("Erreur : tn.esprit.gestionzoo.entities.Animal non trouvé.");
         return false;
     }
 
@@ -80,7 +80,7 @@ public class Zoo {
 
     // Méthode d'affichage du zoo
     public void displayZoo() {
-        System.out.println("\n--- Informations du Zoo ---");
+        System.out.println("\n--- Informations du tn.esprit.gestionzoo.entities.Zoo ---");
         System.out.println("Nom du zoo : " + name);
         System.out.println("Ville : " + city);
         System.out.println("Nombre d'animaux : " + animalCount);
