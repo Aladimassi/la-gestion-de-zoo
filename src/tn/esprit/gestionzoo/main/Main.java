@@ -1,56 +1,35 @@
 package tn.esprit.gestionzoo.main;
 
 import tn.esprit.gestionzoo.entities.Animal;
+import tn.esprit.gestionzoo.entities.Aquatic;
+import tn.esprit.gestionzoo.entities.Dolphin;
+import tn.esprit.gestionzoo.entities.Penguin;
+import tn.esprit.gestionzoo.entities.Terrestrial;
 import tn.esprit.gestionzoo.entities.Zoo;
 
 public class Main {
     public static void main(String[] args) {
-        // Validation manuelle pour le nom du zoo
-        String zooName = "Safari Park";
-        String zooCity = "Paris";
-        if (zooName == null || zooName.trim().isEmpty()) {
-            System.out.println("Erreur : Le nom du zoo ne peut pas être vide.");
-            return;
-        }
+        // Création d'un zoo
+        Zoo zoo = new Zoo("Safari Park", "Paris");
 
-        Zoo zoo = new Zoo(zooName, zooCity);
+        // Création des animaux
+        Aquatic aquatic = new Aquatic("Fish", "Goldfish", 1, false, "Freshwater");
+        Terrestrial terrestrial = new Terrestrial("Mammal", "Dog", 5, true, 4);
+        Dolphin dolphin = new Dolphin("Mammal", "Dolphin", 10, true, "Ocean", 55.5f);
+        Penguin penguin = new Penguin("Bird", "Penguin", 3, false, "Antarctica", 100.0f);
 
-        // Ajout d'animaux avec validation manuelle
-        Animal lion = createAnimal("Felidae", "Lion", 5, true);
-        Animal tiger = createAnimal("Felidae", "Tiger", 3, true);
-        Animal elephant = createAnimal("Elephantidae", "Elephant", 10, false);
-
-        if (lion != null) zoo.addAnimal(lion);
-        if (tiger != null) zoo.addAnimal(tiger);
-        if (elephant != null) zoo.addAnimal(elephant);
+        // Ajout des animaux au zoo
+        zoo.addAnimal(aquatic);
+        zoo.addAnimal(terrestrial);
+        zoo.addAnimal(dolphin);
+        zoo.addAnimal(penguin);
 
         // Affichage des informations du zoo
         zoo.displayZoo();
 
-        // Ajout d'un animal invalide
-        Animal invalidAnimal = createAnimal("Felidae", "Invalid", -2, true);
-        if (invalidAnimal != null) zoo.addAnimal(invalidAnimal);
-
-        // Création d'un zoo avec un nom vide
-        String invalidZooName = "";
-        if (invalidZooName == null || invalidZooName.trim().isEmpty()) {
-            System.out.println("Erreur : Le nom du zoo ne peut pas être vide.");
-        } else {
-            Zoo invalidZoo = new Zoo(invalidZooName, "Marseille");
-            invalidZoo.displayZoo();
-        }
-    }
-
-    // Méthode pour valider et créer un animal
-    private static Animal createAnimal(String family, String name, int age, boolean isMammal) {
-        if (name == null || name.trim().isEmpty()) {
-            System.out.println("Erreur : Le nom de l'animal ne peut pas être vide.");
-            return null;
-        }
-        if (age < 0) {
-            System.out.println("Erreur : L'âge d'un animal ne peut pas être négatif.");
-            return null;
-        }
-        return new Animal(family, name, age, isMammal);
+        // Appel de la méthode swim()
+        aquatic.swim(); // Affiche "This aquatic animal is swimming."
+        dolphin.swim(); // Affiche "This dolphin is swimming."
+        penguin.swim(); // Affiche "This aquatic animal is swimming."
     }
 }
