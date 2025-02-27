@@ -11,24 +11,34 @@ public class Main {
     public static void main(String[] args) {
         // Création d'un zoo
         Zoo zoo = new Zoo("Safari Park", "Paris");
-
-        // Création des animaux
-        Aquatic aquatic = new Aquatic("Fish", "Goldfish", 1, false, "Freshwater");
-        Terrestrial terrestrial = new Terrestrial("Mammal", "Dog", 5, true, 4);
+        Penguin penguin1 = new Penguin("Oiseau", "Pingu", 3, false, "Antarctique", 50.0f);
+        Penguin penguin2 = new Penguin("Oiseau", "Tux", 4, false, "Antarctique", 70.0f);
+        zoo.addAquaticAnimal(penguin1);
+        zoo.addAquaticAnimal(penguin2);
+        System.out.println("Profondeur maximale de nage des pingouins : " + zoo.maxPenguinSwimmingDepth());
+        zoo.displayNumberOfAquaticsByType();
+        // Création des animaux aquatiques
         Dolphin dolphin = new Dolphin("Mammal", "Dolphin", 10, true, "Ocean", 55.5f);
         Penguin penguin = new Penguin("Bird", "Penguin", 3, false, "Antarctica", 100.0f);
+        Dolphin dolphin1 = new Dolphin("Mammal", "Flipper", 5, true, "Ocean", 50.0f);
+        Dolphin dolphin2 = new Dolphin("Mammal", "Flipper", 5, true, "Ocean", 60.0f);
+        System.out.println(dolphin1.equals(dolphin2));
+        // Création d'un animal terrestre
+        Terrestrial terrestrial = new Terrestrial("Mammal", "Dog", 5, true, 4);
 
-        // Ajout des animaux au zoo
-        zoo.addAnimal(aquatic);
+        // Ajout des animaux aquatiques au zoo
+
+        zoo.addAquaticAnimal(dolphin);
+        zoo.addAquaticAnimal(penguin);
+
+        // Ajout de l'animal terrestre au zoo
         zoo.addAnimal(terrestrial);
-        zoo.addAnimal(dolphin);
-        zoo.addAnimal(penguin);
 
         // Affichage des informations du zoo
         zoo.displayZoo();
 
-        // Appel de la méthode swim()
-        aquatic.swim(); // Affiche "This aquatic animal is swimming."
+        // Appel de la méthode swim() pour les animaux aquatiques
+
         dolphin.swim(); // Affiche "This dolphin is swimming."
         penguin.swim(); // Affiche "This aquatic animal is swimming."
     }
