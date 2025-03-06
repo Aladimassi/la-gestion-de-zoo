@@ -6,37 +6,58 @@ public class Animal {
     private int age;
     private boolean isMammal;
 
-    // Constructeur
-    public Animal(String family, String name, int age, boolean isMammal) {
+    public Animal(String family, String name, int age, boolean isMammal) throws InvalidAgeException {
         this.family = family;
-        this.name = name;
-        this.age = age;
+        setName(name); // Validation via the setter
+        setAge(age); // Validation via the setter
         this.isMammal = isMammal;
     }
 
-    // Getter pour le nom
+    public String getFamily() {
+        return family;
+    }
+
+    public void setFamily(String family) {
+        this.family = family;
+    }
+
     public String getName() {
         return name;
     }
 
-    // Méthode d'affichage
-    public void displayAnimal() {
-        System.out.println("Nom de l'animal : " + name);
-        System.out.println("Famille : " + family);
-        System.out.println("Âge : " + age + " ans");
-        System.out.println("Mammifère : " + (isMammal ? "Oui" : "Non"));
+    public void setName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Le nom de l'animal ne peut pas être vide.");
+        }
+        this.name = name;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Animal animal = (Animal) obj;
-        return name.equalsIgnoreCase(animal.name) && family.equalsIgnoreCase(animal.family);
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) throws InvalidAgeException {
+        if (age < 0) {
+            throw new InvalidAgeException("L'âge d'un animal ne peut pas être négatif.");
+        }
+        this.age = age;
+    }
+
+    public boolean isMammal() {
+        return isMammal;
+    }
+
+    public void setMammal(boolean isMammal) {
+        this.isMammal = isMammal;
     }
 
     @Override
     public String toString() {
-        return "tn.esprit.gestionzoo.entities.Animal [name=" + name + ", family=" + family + ", age=" + age + ", isMammal=" + isMammal + "]";
+        return "Animal{" +
+                "family='" + family + '\'' +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", isMammal=" + isMammal +
+                '}';
     }
 }
