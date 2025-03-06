@@ -6,10 +6,10 @@ public class Animal {
     private int age;
     private boolean isMammal;
 
-    public Animal(String family, String name, int age, boolean isMammal) {
+    public Animal(String family, String name, int age, boolean isMammal) throws InvalidAgeException {
         this.family = family;
-        setName(name); // Validation via le setter
-        setAge(age); // Validation via le setter
+        setName(name); // Validation via the setter
+        setAge(age); // Validation via the setter
         this.isMammal = isMammal;
     }
 
@@ -36,9 +36,9 @@ public class Animal {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(int age) throws InvalidAgeException {
         if (age < 0) {
-            throw new IllegalArgumentException("L'âge d'un animal ne peut pas être négatif.");
+            throw new InvalidAgeException("L'âge d'un animal ne peut pas être négatif.");
         }
         this.age = age;
     }
