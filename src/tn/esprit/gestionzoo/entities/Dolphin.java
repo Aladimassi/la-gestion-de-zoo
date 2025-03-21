@@ -3,21 +3,16 @@ package tn.esprit.gestionzoo.entities;
 public class Dolphin extends Aquatic {
     private float swimmingSpeed;
 
-    public Dolphin(String family, String name, int age, boolean isMammal, String habitat, float swimmingSpeed) {
-        // Call the superclass constructor and handle InvalidAgeException
-        try {
-            super(family, name, age, isMammal, habitat);
-        } catch (InvalidAgeException e) {
-            // Handle the exception (e.g., set a default age or log the error)
-            System.out.println("Invalid age provided for Dolphin. Setting default age to 0.");
-            try {
-                super(family, name, 0, isMammal, habitat); // Set default age to 0
-            } catch (InvalidAgeException ex) {
-                // This should never happen since age is now 0
-                throw new RuntimeException("Unexpected error while setting default age.", ex);
-            }
-        }
+    // Corrected constructor
+    public Dolphin(String family, String name, int age, boolean isMammal, String habitat, float swimmingSpeed) throws InvalidAgeException {
+        // Validate age before calling super()
+        super(family, name, Math.max(age, 0), isMammal, habitat); // Set age to 0 if negative
         this.swimmingSpeed = swimmingSpeed;
+
+        // Warn if age was invalid
+        if (age < 0) {
+            System.out.println("Invalid age provided for Dolphin. Default age set to 0.");
+        }
     }
 
     public float getSwimmingSpeed() {
@@ -31,6 +26,16 @@ public class Dolphin extends Aquatic {
     @Override
     public String toString() {
         return super.toString() + ", swimmingSpeed=" + swimmingSpeed;
+    }
+
+    @Override
+    public void eatPlant(Food plant) {
+
+    }
+
+    @Override
+    public void eatPlantAndMeat(Food food) {
+
     }
 
     @Override
