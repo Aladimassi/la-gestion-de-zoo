@@ -1,18 +1,17 @@
 package tn.esprit.gestionzoo.main;
 
-import tn.esprit.gestionzoo.entities.Animal;
-import tn.esprit.gestionzoo.entities.Aquatic;
-import tn.esprit.gestionzoo.entities.Dolphin;
-import tn.esprit.gestionzoo.entities.Penguin;
-import tn.esprit.gestionzoo.entities.Terrestrial;
-import tn.esprit.gestionzoo.entities.Zoo;
-import tn.esprit.gestionzoo.entities.ZooFullException;
-import tn.esprit.gestionzoo.entities.InvalidAgeException;
+import tn.esprit.gestionzoo.entities.*;
+import tn.esprit.gestionzoo.entities.Food; // Added missing import
 
 public class Main {
     public static void main(String[] args) {
-        // Création d'un zoo
         Zoo zoo = new Zoo("Safari Park", "Paris");
+        try {
+            Dolphin dolphin = new Dolphin("Mammal", "Dolphin", -5, true, "Ocean", 55.5f);
+            // This will print: "Invalid age provided for Dolphin. Default age set to 0."
+        } catch (InvalidAgeException e) {
+            // This block will never execute because age is clamped to 0
+        }
 
         try {
             // Test with valid age
@@ -33,10 +32,15 @@ public class Main {
 
             zoo.addAquaticAnimal(dolphin);
             zoo.addAquaticAnimal(penguin);
-
             zoo.addAnimal(terrestrial);
 
-            // Test with invalid age (this will throw InvalidAgeException)
+            // Test eat methods (added)
+            penguin1.eatMeat(Food.MEAT);
+            terrestrial.eatMeat(Food.MEAT);
+            terrestrial.eatPlant(Food.PLANT);
+            terrestrial.eatPlantAndMeat(Food.BOTH);
+
+            // Test with invalid age (now properly caught)
             Terrestrial invalidAnimal = new Terrestrial("Mammal", "Invalid", -1, true, 4);
             zoo.addAnimal(invalidAnimal);
 
@@ -44,7 +48,7 @@ public class Main {
 
             dolphin.swim();
             penguin.swim();
-        } catch (ZooFullException e) {
+        } catch (ZooFullException | InvalidAgeException e) { // Added InvalidAgeException to catch
             System.out.println(e.getMessage());
         }
     }

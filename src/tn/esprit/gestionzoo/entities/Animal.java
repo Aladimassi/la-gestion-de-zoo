@@ -1,6 +1,6 @@
 package tn.esprit.gestionzoo.entities;
 
-public class Animal {
+public abstract class Animal {
     private String family;
     private String name;
     private int age;
@@ -60,4 +60,10 @@ public class Animal {
                 ", isMammal=" + isMammal +
                 '}';
     }
+
+    public abstract void eatMeat(Food meat);
+
+    public abstract void eatPlant(Food plant);
+
+    public abstract void eatPlantAndMeat(Food food);
 }
