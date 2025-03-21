@@ -23,6 +23,9 @@ public abstract class Aquatic extends Animal {
 
     // Méthode abstraite swim()
     public abstract void swim();
+    public void eatMeat(Food meat) {
+        System.out.println(getName() + " is eating meat: " + meat);
+    }
 
     // Redéfinition de la méthode equals()
     @Override
